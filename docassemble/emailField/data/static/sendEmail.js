@@ -19,4 +19,5 @@ $('.send-email-button').click(function(){
         });
       }
   });  // ends url_action_call and callback
+
 });
