@@ -4,6 +4,9 @@ metadata:
 include:
   - email.yml
 ---
+features:
+  labels above fields: True
+---
 id: test_attachment_for_email
 attachment:
   - name: A hello world document

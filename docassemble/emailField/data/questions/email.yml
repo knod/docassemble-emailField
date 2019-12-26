@@ -1,6 +1,9 @@
 metadata:
   title: Email field
 ---
+features:
+  css: single-line-email.css
+---
 comment: |
   Required variables:
   - attachement
@@ -24,6 +27,8 @@ comment: |
 ---
 features:
   javascript: sendEmail.js
+  css:
+    
 ---
 id: email_field
 code: |
@@ -52,11 +57,6 @@ code: |
     if (not defined( attr )):
       define(attr, defaults[ attr ])
 
-  # class="form-group row darlap-parent da-field-container da-field-container-datatype-email": width: 100%; display: inline-block;
-  # .da-form-label.datext-right { max-width: fit-content };
-  # .col-md-8.dafieldpart {display: inline-block; width: 59%;}\
-  # .col.darlap {margin-left: 0; display: inline-block; width: fit-content;}
-  # .col.darlap p {margin-bottom: 0;}
   email_field = [{
     'label': 'Email',
     'field': 'email_address',
