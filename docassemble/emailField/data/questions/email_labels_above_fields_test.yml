@@ -1,0 +1,28 @@
+metadata:
+  title: Email field test
+---
+include:
+  - email.yml
+---
+features:
+  labels above fields: True
+---
+id: test_attachment_for_email
+attachment:
+  - name: A hello world document
+    variable name: email_attachment
+    filename: Hello_World
+    description: |
+      A document with a classic message
+    content: |
+      Hello, world!
+---
+mandatory: True
+code: |
+  email_attachment = email_attachment
+  send_an_email
+---
+question: Email test
+sets: send_an_email
+fields:
+  code: email_field
