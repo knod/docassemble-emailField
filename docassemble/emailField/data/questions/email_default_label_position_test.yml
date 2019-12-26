@@ -5,7 +5,7 @@ include:
   - email-field.yml
 ---
 features:
-  labels above fields: True
+  labels above fields: False
 ---
 id: test_attachment_for_email
 attachment:
