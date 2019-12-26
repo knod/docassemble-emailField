@@ -1,0 +1,97 @@
+metadata:
+  title: Email field
+---
+comment: |
+  Required variables:
+  - attachement
+
+  Variables that have defaults:
+  # Email contents
+  - subject
+  - text_content
+  
+  # Field settings
+  - default_email_address
+  - opens_new_window
+  - send_button_text
+  - send_button_icon
+  - email_required
+
+  TODO:
+  - Functionality that doesn't require an attachment
+  - More customization options if desire is expressed
+  - Is there a way to extrapolate this for multiple emails on one page?
+---
+features:
+  javascript: sendEmail.js
+---
+id: email_field
+code: |
+
+  defaults = {
+    'email_attachment': None,  # Must be included from interview page
+
+    'subject': 'Your Pre-filled Document',
+    'text_content': '',
+
+    'opens_new_window': False,
+    'send_button_text': 'Send',
+    'send_button_icon': 'envelope',
+    'default_email_address': user_info().email,
+    'email_required': False,
+
+    # Possible future variables
+    # 'send_error_message': 'Sorry about this, but the email didn't get sent. Try giving it some time and then try again.',
+    # 'send_success_message_start': 'The email got sent to ',
+    # 'send_success_message_end': '!,
+    # 'trying_send_message_start': 'We are trying to send the email to ',
+    # 'trying_send_message_end': '.',
+  }
+  
+  for attr in defaults:
+    if (not defined( attr )):
+      define(attr, defaults[ attr ])
+
+  # class="form-group row darlap-parent da-field-container da-field-container-datatype-email": width: 100%; display: inline-block;
+  # .da-form-label.datext-right { max-width: fit-content };
+  # .col-md-8.dafieldpart {display: inline-block; width: 59%;}\
+  # .col.darlap {margin-left: 0; display: inline-block; width: fit-content;}
+  # .col.darlap p {margin-bottom: 0;}
+  email_field = [{
+    'label': 'Email',
+    'field': 'email_address',
+    'default': user_info().email,
+    'datatype': 'email',
+    'required': email_required,
+    'note': action_button_html(
+      "#", id_tag="emailSender",
+      classname="send-email-button",
+      new_window=opens_new_window,
+      icon=send_button_icon,
+      label=send_button_text,
+      color="primary",
+      size="md"
+    ),
+  }]
+---
+template: email_template
+subject: ${ subject }
+content: |
+  % if ( not text_content == '' ):
+  ${ text_content }
+  % endif
+---
+id: send_email_event
+event: send_email_event
+code: |
+  #raise Exception( 'error triggered on purpose because we must test' )
+  address = action_argument( 'address' )
+  was_successful = send_email( to=address, template=email_template, attachments=email_attachment )
+  json_response(dict( was_successful=was_successful, email_address=address ))
+---
+id: log_action_message_to_docassemble
+event: log_action_message_to_docassemble
+code: |
+   message = action_argument( 'message' )
+   log( message )
+---
