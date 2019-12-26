@@ -43,7 +43,7 @@ def find_package_data(where='.', package='', exclude=standard_exclude, exclude_d
     return out
 
 setup(name='docassemble.emailField',
-      version='0.0.4',
+      version='0.1.0',
       description=('A docassemble extension.'),
       long_description="Creates one email field that will send an attachement with\r\ncustomizations possible, such as email subject line and\r\nemail contents. Includes a 'Send' button on the same line\r\nas the email field. Should remain so for various device widths.\r\n\r\nArrangement remains the same for\r\n\r\n``` yaml\r\n---\r\nfeatures:\r\n  labels above fields: True\r\n---\r\n```\r\n\r\nShould this be optional? Choice of css files?\r\n\r\n## Example\r\n\r\nSee email_labels_above_fields_test.yml and\r\nemail_default_label_position_test.yml for example use.\r\n\r\n## TODO\r\n- Create separate css files for different label placement style choices?\r\n\r\n## Stretch Goals\r\n- Test multiple email fields\r\n",
       long_description_content_type='text/markdown',
